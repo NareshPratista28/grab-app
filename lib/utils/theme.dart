@@ -21,6 +21,7 @@ class AppColors {
   static const Color primaryColor = Color(0xFF34C3F9);
   static const Color yellowButtonColor = Color(0xFFFACC15);
   static const Color itemBgColor = Color(0xFFCCEFDC);
+  static const Color payBgColor = Color(0xFFF9F9F9);
 }
 
 class AppTextStyles {

@@ -28,12 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 50,
               color: AppColors.greenColor,
             ),
-            Column(
-              children: [
-                // Search bar section
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 30, 16, 16),
-                  child: Row(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 30, 16, 16),
+              child: Column(
+                children: [
+                  Row(
                     children: [
                       Expanded(
                         child: Container(
@@ -62,9 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     hintText: 'Search...',
                                     border: InputBorder.none,
                                   ),
-                                  onSubmitted: (value) {
-                                    print('Searching for: $value');
-                                  },
                                 ),
                               ),
                             ],
@@ -90,13 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 27),
-
-                // Card Section - Moved up
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
+                  const SizedBox(height: 20),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildActionCard(
@@ -104,17 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       _buildPointsCard('Use Points', '758'),
                     ],
                   ),
-                ),
-                const SizedBox(height: 27),
-
-                // Category Section using GridView with fixed height
-                SizedBox(
-                  height: 200, // Fixed height for GridView
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    height: 200,
                     child: GridView.count(
-                      physics:
-                          const NeverScrollableScrollPhysics(), // Prevent scrolling
+                      physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: 4,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 10,
@@ -130,8 +115,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 30),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Celebrate Mid-Autumn Festival',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAdsCardList()
+                ],
+              ),
             ),
           ],
         ),
@@ -174,7 +172,99 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Helper methods remain unchanged
+  Widget _buildAdsCardList() {
+    return SizedBox(
+      height: 260,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          _buildAdsCard(
+            'Order mooncakes to gift & to enjoy',
+            'Until 21 Sep',
+          ),
+          _buildAdsCard(
+            'Plus an EXTRA \$20 OFF on groceries',
+            'Until 31 Aug',
+          ),
+          _buildAdsCard(
+            'Plus an EXTRA \$20 OFF on groceries',
+            'Until 31 Aug',
+          ),
+          _buildAdsCard(
+            'Plus an EXTRA \$20 OFF on groceries',
+            'Until 31 Aug',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdsCard(
+    String title,
+    String date,
+  ) {
+    return Container(
+      width: 160,
+      margin: const EdgeInsets.only(right: 12),
+      child: Card(
+        color: AppColors.whiteColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 180,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('lib/assets/image/Banner 01.png'),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today,
+                      size: 12,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      date,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildCategoryItem(String title, IconData icon) {
     return Column(
       children: [
@@ -208,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
       width: 172,
       height: 56,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -226,24 +316,27 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Icon(icon, color: AppColors.greenColor),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

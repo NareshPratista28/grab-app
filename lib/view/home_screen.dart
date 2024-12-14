@@ -30,14 +30,47 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 30, 16, 16),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          height: 40,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.search, color: Colors.grey),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: TextField(
+                                    controller: _searchController,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Search...',
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Container(
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
@@ -50,85 +83,59 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.search, color: Colors.grey),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: TextField(
-                                  controller: _searchController,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Search...',
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          child:
+                              const Icon(Icons.crop_free, color: Colors.grey),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 4,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(Icons.crop_free, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildActionCard(
-                          'Activate', 'GrabPay', Icons.attach_money),
-                      _buildPointsCard('Use Points', '758'),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  SizedBox(
-                    height: 200,
-                    child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 10,
-                      children: [
-                        _buildCategoryItem('Food', Icons.restaurant),
-                        _buildCategoryItem('Mart', Icons.shopping_basket),
-                        _buildCategoryItem('Express', Icons.local_shipping),
-                        _buildCategoryItem('Transport', Icons.directions_car),
-                        _buildCategoryItem('Offers', Icons.local_offer),
-                        _buildCategoryItem('Gift Cards', Icons.card_giftcard),
-                        _buildCategoryItem('Offers', Icons.local_offer_sharp),
-                        _buildCategoryItem('More', Icons.more_horiz_sharp),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Celebrate Mid-Autumn Festival',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: _buildActionCard(
+                              'Activate', 'GrabPay', Icons.attach_money),
+                        ),
+                        const SizedBox(width: 12),
+                        Flexible(
+                          child: _buildPointsCard('Use Points', '758'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.23,
+                      child: GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 10,
+                        children: [
+                          _buildCategoryItem('Food', Icons.restaurant),
+                          _buildCategoryItem('Mart', Icons.shopping_basket),
+                          _buildCategoryItem('Express', Icons.local_shipping),
+                          _buildCategoryItem('Transport', Icons.directions_car),
+                          _buildCategoryItem('Offers', Icons.local_offer),
+                          _buildCategoryItem('Gift Cards', Icons.card_giftcard),
+                          _buildCategoryItem('Offers', Icons.local_offer_sharp),
+                          _buildCategoryItem('More', Icons.more_horiz_sharp),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  _buildAdsCardList()
-                ],
+                    const SizedBox(height: 30),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Celebrate Mid-Autumn Festival',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildAdsCardList()
+                  ],
+                ),
               ),
             ),
           ],

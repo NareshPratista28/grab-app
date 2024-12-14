@@ -71,8 +71,8 @@ class SignupScreen extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          BorderSide(color: AppColors.greenColor, width: 2),
+                      borderSide: const BorderSide(
+                          color: AppColors.greenColor, width: 2),
                     ),
                   ),
                   keyboardType: TextInputType.emailAddress,
@@ -89,8 +89,8 @@ class SignupScreen extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          BorderSide(color: AppColors.greenColor, width: 2),
+                      borderSide: const BorderSide(
+                          color: AppColors.greenColor, width: 2),
                     ),
                   ),
                 ),
